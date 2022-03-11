@@ -6,7 +6,7 @@ class MetricController < ApplicationController
   def create
     metric = Metric.create(metrics_params)
     if metric.persisted?
-      render json: { success: true }
+      render json: { }
     else
       render json: { errors: metric.errors }, status: :unprocessable_entity
     end

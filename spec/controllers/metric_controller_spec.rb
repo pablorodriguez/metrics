@@ -9,9 +9,14 @@ describe MetricController, type: :request do
         allow(Metric).to receive(:create).and_call_original
       end
 
-      it 'return success' do
+      it 'then return success' do
         post '/metric/errors', params: { value: 55 }
         expect(response).to have_http_status(:success)
+      end
+
+      it 'then return empty body' do
+        post '/metric/errors', params: { value: 55 }
+        expect(response.body).to eq('{}')
       end
 
       it 'create a new metrics with given attributes' do
@@ -25,7 +30,7 @@ describe MetricController, type: :request do
         allow(Metric).to receive(:create).and_call_original
       end
 
-      it 'return errors' do
+      it 'then return errors' do
         post '/metric/errors'
         expect(response).to have_http_status(:unprocessable_entity)
       end
@@ -34,12 +39,12 @@ describe MetricController, type: :request do
 
   describe "GET" do
 
-    context '/:key/sum' do
+    context 'metric/:key/sum' do
       before(:each) do
         allow(MetricSumService).to receive(:run).and_call_original
       end
 
-      it 'return success' do
+      it 'then return success' do
         get '/metric/errors/sum'
         expect(response).to have_http_status(:success)
       end
