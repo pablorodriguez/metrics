@@ -13,8 +13,12 @@ class MetricController < ApplicationController
   end
 
   def sum
-    metrics = MetricSumService.run(key: params[:name])
-    render json: { value: metrics.result, success: true } if metrics.valid?
+    metrics = MetricSumService.run(key: params[:key])
+    if metrics.valid?
+      render json: { value: metrics.result, success: true }
+    else
+      render json: { errors: metrics.errors.messages }, status: :unprocessable_entity
+    end
   end
 
   private

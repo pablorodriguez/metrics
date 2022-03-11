@@ -50,5 +50,16 @@ describe MetricController, type: :request do
       end
     end
 
+    context 'when Metric Service return invalid' do
+      before(:each) do
+        allow(MetricSumService).to receive(:run).and_call_original
+        allow_any_instance_of(MetricSumService).to receive(:valid?).and_return(false)
+      end
+
+      it 'then return error' do
+        get '/metric/key/sum'
+        expect(response).to have_http_status(:unprocessable_entity)
+      end
+    end
   end
 end
