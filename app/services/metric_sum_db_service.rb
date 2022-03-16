@@ -4,7 +4,7 @@ require 'active_interaction'
 
 #
 # Service that return sum off values in last 2 days
-class MetricSumService < ActiveInteraction::Base
+class MetricSumDbService < ActiveInteraction::Base
   LAST_HOURS = 1
   string :key
 
