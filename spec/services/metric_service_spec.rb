@@ -11,6 +11,8 @@ describe MetricService do
       MetricService.reset
       travel_to(2.hours.ago) do
         MetricService.add(key: 'visitor', value: 20)
+        MetricService.add(key: 'visitor', value: 22)
+        MetricService.add(key: 'visitor', value: 23)
       end
       travel_back
       MetricService.add(key: 'visitor', value: 50)
