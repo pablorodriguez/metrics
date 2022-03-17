@@ -14,6 +14,10 @@ POST /metric/{key}
     "value": 30
     }
 ```
+```
+curl --location --request POST 'http://localhost:3000/metric/visitor' --form 'value="10.2"'
+```
+
 ##### GET metric
 Return the sum of all metrics reportes for this key over the last past hour
 ```json
@@ -22,6 +26,10 @@ Response 200
 {
 	"value": 400
 }
+
+```
+```
+curl --location --request GET 'http://localhost:3000/metric/visitor/sum'
 ```
 
 ### Ruby version
