@@ -4,21 +4,13 @@
 # Create Metrics values
 class MetricController < ApplicationController
   def create
-    metric = Metric.create(metrics_params)
-    if metric.persisted?
-      render json: { }
-    else
-      render json: { errors: metric.errors }, status: :unprocessable_entity
-    end
+    MetricService.add(metrics_params)
+    render json: { }
   end
 
   def sum
-    metrics = MetricSumService.run(key: params[:key])
-    if metrics.valid?
-      render json: { value: metrics.result, success: true }
-    else
-      render json: { errors: metrics.errors.messages }, status: :unprocessable_entity
-    end
+    metrics = MetricService.sum(params[:key])
+    render json: { value: metrics }
   end
 
   private
